@@ -121,12 +121,12 @@ class LookupTable555SolveFirstSixEdges(LookupTable):
     11 steps has 78,556 entries (0 percent, 4.00x previous step)
     12 steps has 400,860 entries (0 percent, 5.10x previous step)
     13 steps has 1,899,168 entries (0 percent, 4.74x previous step)
-    14 steps has 8,393,229 entries (4 percent, 4.42x previous step)
-    15 steps has 32,970,960 entries (16 percent, 3.93x previous step)
-    16 steps has 116,204,620 entries (59 percent, 3.52x previous step)
-    17 steps has 34,381,792 entries (17 percent, 0.30x previous step)
+    14 steps has 8,393,229 entries (3 percent, 4.42x previous step)
+    15 steps has 32,970,960 entries (13 percent, 3.93x previous step)
+    16 steps has 116,204,620 entries (46 percent, 3.52x previous step)
+    17 steps has 90,764,224 entries (36 percent, 0.78x previous step) PARTIAL
 
-    Total: 194,355,057 entries
+    Total: 250,737,489 entries
 
     How many entries are left?
         12! is 479,001,600
@@ -142,9 +142,9 @@ class LookupTable555SolveFirstSixEdges(LookupTable):
             parent,
             'lookup-table-5x5x5-step100-solve-first-six-edges.txt',
             'OOopPPQQqrRRsSSTTtuUUVVvWWwxXXYYyzZZ',
-            linecount=194355057,
+            linecount=250737489,
             max_depth=17,
-            filesize=19241150643)
+            filesize=24823011411)
 
     def ida_heuristic(self):
         state = edges_recolor_pattern_555(self.parent.state[:])
@@ -265,7 +265,6 @@ class LookupTable555StageSecondFourEdges(LookupTable):
                 state[partner_index] = 'x'
 
         edges_state = ''.join([state[square_index] for square_index in l4e_wings_555])
-        #log.info("FOO: %s" % edges_state)
         return edges_state
 
 
@@ -666,6 +665,15 @@ class RubiksCube555ForNNN(RubiksCube555):
                 self.pair_first_six_edges_555(False)
 
                 if not self.edges_paired():
+                    if min_solution_len:
+                        solve_steps = self.solution[original_solution_len:]
+                        #solution_len = len(solve_steps)
+                        solution_len = self.get_solution_len_minus_rotates(solve_steps)
+                        if solution_len + 1 >= min_solution_len:
+                            log.info("%s: %d/%d SKIP solution_len is %d but min_solution_len is %d" % (
+                                self, line_number+1, len_results, solution_len, min_solution_len))
+                            continue
+
                     self.rotate("z")
 
                     # It doesn't appear to matter much if you do D2 R2 vs U2 L2
@@ -680,8 +688,10 @@ class RubiksCube555ForNNN(RubiksCube555):
                 #    self, line_number+1, len_results, self.get_solution_len_minus_rotates(solution_steps)))
                 continue
 
+            # dwalton reset; ./usr/bin/rubiks-cube-solver.py --state UUUUUBUUUUUUUUURUUUUUUUUURRRRRRRRRRRRRRRURRRRRRRFRFFFFFFFFFFFFFFFFFFFLFDFRFDBDDDDDDDDDDDDDDDDDDDFDLDLDLFLLLLLLLLLLLLLLLLLLLLLBBBBBBBBBBBBBBBBBBBBBUBDB
             solve_steps = self.solution[original_solution_len:]
             solution_len = self.get_solution_len_minus_rotates(solve_steps)
+            #solution_len = len(solve_steps)
 
             if min_solution_len is None or solution_len < min_solution_len:
                 log.warning("%s: %d/%d 1st 6-edges can be staged in %d steps %s (NEW MIN)" % (
@@ -699,10 +709,10 @@ class RubiksCube555ForNNN(RubiksCube555):
 
             for step in min_solution_steps:
                 self.rotate(step)
-            #self.print_horse_shoe(wing_strs)
 
-        if min_wing_strs:
             self.print_horse_shoe(min_wing_strs)
+            # dwalton count is off here
+            log.info("%s: 1st 6-edges staged to horseshoe via %s" % (self, " ".join(min_solution_steps)))
             self.solution.append("COMMENT_%d_steps_555_horseshoe_staged" % self.get_solution_len_minus_rotates(self.solution[original_solution_len:]))
             log.info("%s: 1st 6-edges staged to horseshoe, %d steps in" % (self, self.get_solution_len_minus_rotates(self.solution)))
         else:
@@ -1179,6 +1189,7 @@ class RubiksCube555ForNNN(RubiksCube555):
                 self.rotate("D2")
                 self.rotate("R2")
 
+            # dwalton
             self.solution.append("COMMENT_%d_steps_555_horseshoe_staged" % self.get_solution_len_minus_rotates(self.solution[tmp_solution_len:]))
             self.print_cube()
 

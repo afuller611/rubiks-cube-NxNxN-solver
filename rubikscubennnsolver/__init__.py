@@ -3940,16 +3940,17 @@ class RubiksCube(object):
         count = 0
         size_str = str(self.size)
 
+        ignore = set(('CENTERS_SOLVED', 'EDGES_GROUPED',
+            "x", "x'", "x2",
+            "y", "y'", "y2",
+            "z", "z'", "z2"))
+
         for step in solution:
-            if step in ('CENTERS_SOLVED', 'EDGES_GROUPED'):
+
+            if step in ignore:
                 continue
 
             if step.startswith('COMMENT'):
-                continue
-
-            if step in ("x", "x'", "x2",
-                        "y", "y'", "y2",
-                        "z", "z'", "z2"):
                 continue
 
             if step.startswith(size_str):
