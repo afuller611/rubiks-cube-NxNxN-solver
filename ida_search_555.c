@@ -445,62 +445,62 @@ get_edges_paired_count(char *cube)
     // There are 12 edges to check
 
     // UB
-    if (cube[2] == cube[3] && cube[104] == cube[103] && cube[4] == cube[3] && cube[102] == cube[103]) {
+    if (cube[2] != '-' && cube[2] == cube[3] && cube[104] == cube[103] && cube[4] == cube[3] && cube[102] == cube[103]) {
         count++;
     }
 
     // UL
-    if (cube[6] == cube[11] && cube[27] == cube[28] && cube[16] == cube[11] && cube[29] == cube[28]) {
+    if (cube[6] != '-' && cube[6] == cube[11] && cube[27] == cube[28] && cube[16] == cube[11] && cube[29] == cube[28]) {
         count++;
     }
 
     // UR
-    if (cube[10] == cube[15] && cube[79] == cube[78] && cube[20] == cube[15] && cube[77] == cube[78]) {
+    if (cube[10] != '-' && cube[10] == cube[15] && cube[79] == cube[78] && cube[20] == cube[15] && cube[77] == cube[78]) {
         count++;
     }
 
     // UF
-    if (cube[22] == cube[23] && cube[52] == cube[53] && cube[24] == cube[23] && cube[54] == cube[53]) {
+    if (cube[22] != '-' && cube[22] == cube[23] && cube[52] == cube[53] && cube[24] == cube[23] && cube[54] == cube[53]) {
         count++;
     }
 
     // LB
-    if (cube[31] == cube[36] && cube[110] == cube[115] && cube[41] == cube[36] && cube[120] == cube[115]) {
+    if (cube[31] != '-' && cube[31] == cube[36] && cube[110] == cube[115] && cube[41] == cube[36] && cube[120] == cube[115]) {
         count++;
     }
 
     // LF
-    if (cube[35] == cube[40] && cube[56] == cube[61] && cube[45] == cube[40] && cube[66] == cube[61]) {
+    if (cube[35] != '-' && cube[35] == cube[40] && cube[56] == cube[61] && cube[45] == cube[40] && cube[66] == cube[61]) {
         count++;
     }
 
     // RF
-    if (cube[60] == cube[65] && cube[81] == cube[86] && cube[70] == cube[65] && cube[91] == cube[86]) {
+    if (cube[60] != '-' && cube[60] == cube[65] && cube[81] == cube[86] && cube[70] == cube[65] && cube[91] == cube[86]) {
         count++;
     }
 
     // RB
-    if (cube[85] == cube[90] && cube[106] == cube[111] && cube[95] == cube[90] && cube[116] == cube[111]) {
+    if (cube[85] != '-' && cube[85] == cube[90] && cube[106] == cube[111] && cube[95] == cube[90] && cube[116] == cube[111]) {
         count++;
     }
 
     // DF
-    if (cube[72] == cube[73] && cube[127] == cube[128] && cube[74] == cube[73] && cube[129] == cube[128]) {
+    if (cube[72] != '-' && cube[72] == cube[73] && cube[127] == cube[128] && cube[74] == cube[73] && cube[129] == cube[128]) {
         count++;
     }
 
     // DL
-    if (cube[131] == cube[136] && cube[49] == cube[48] && cube[141] == cube[136] && cube[47] == cube[48]) {
+    if (cube[131] != '-' && cube[131] == cube[136] && cube[49] == cube[48] && cube[141] == cube[136] && cube[47] == cube[48]) {
         count++;
     }
 
     // DR
-    if (cube[135] == cube[140] && cube[97] == cube[98] && cube[145] == cube[140] && cube[99] == cube[98]) {
+    if (cube[135] != '-' && cube[135] == cube[140] && cube[97] == cube[98] && cube[145] == cube[140] && cube[99] == cube[98]) {
         count++;
     }
 
     // DB
-    if (cube[147] == cube[148] && cube[124] == cube[123] && cube[149] == cube[148] && cube[122] == cube[123]) {
+    if (cube[147] != '-' && cube[147] == cube[148] && cube[124] == cube[123] && cube[149] == cube[148] && cube[122] == cube[123]) {
         count++;
     }
 
@@ -516,110 +516,110 @@ get_wings_paired_count(char *cube)
     // There are 24 wings to check
 
     // UB
-    if (cube[2] == cube[3] && cube[104] == cube[103]) {
+    if (cube[2] != '-' && cube[2] == cube[3] && cube[104] == cube[103]) {
         count++;
     }
 
-    if (cube[4] == cube[3] && cube[102] == cube[103]) {
+    if (cube[4] != '-' && cube[4] == cube[3] && cube[102] == cube[103]) {
         count++;
     }
 
     // UL
-    if (cube[6] == cube[11] && cube[27] == cube[28]) {
+    if (cube[6] != '-' && cube[6] == cube[11] && cube[27] == cube[28]) {
         count++;
     }
 
-    if (cube[16] == cube[11] && cube[29] == cube[28]) {
+    if (cube[16] != '-' && cube[16] == cube[11] && cube[29] == cube[28]) {
         count++;
     }
 
     // UR
-    if (cube[10] == cube[15] && cube[79] == cube[78]) {
+    if (cube[10] != '-' && cube[10] == cube[15] && cube[79] == cube[78]) {
         count++;
     }
 
-    if (cube[20] == cube[15] && cube[77] == cube[78]) {
+    if (cube[20] != '-' && cube[20] == cube[15] && cube[77] == cube[78]) {
         count++;
     }
 
     // UF
-    if (cube[22] == cube[23] && cube[52] == cube[53]) {
+    if (cube[22] != '-' && cube[22] == cube[23] && cube[52] == cube[53]) {
         count++;
     }
 
-    if (cube[24] == cube[23] && cube[54] == cube[53]) {
+    if (cube[24] != '-' && cube[24] == cube[23] && cube[54] == cube[53]) {
         count++;
     }
 
     // LB
-    if (cube[31] == cube[36] && cube[110] == cube[115]) {
+    if (cube[31] != '-' && cube[31] == cube[36] && cube[110] == cube[115]) {
         count++;
     }
 
-    if (cube[41] == cube[36] && cube[120] == cube[115]) {
+    if (cube[41] != '-' && cube[41] == cube[36] && cube[120] == cube[115]) {
         count++;
     }
 
     // LF
-    if (cube[35] == cube[40] && cube[56] == cube[61]) {
+    if (cube[35] != '-' && cube[35] == cube[40] && cube[56] == cube[61]) {
         count++;
     }
 
-    if (cube[45] == cube[40] && cube[66] == cube[61]) {
+    if (cube[45] != '-' && cube[45] == cube[40] && cube[66] == cube[61]) {
         count++;
     }
 
     // RF
-    if (cube[60] == cube[65] && cube[81] == cube[86]) {
+    if (cube[60] != '-' && cube[60] == cube[65] && cube[81] == cube[86]) {
         count++;
     }
 
-    if (cube[70] == cube[65] && cube[91] == cube[86]) {
+    if (cube[70] != '-' && cube[70] == cube[65] && cube[91] == cube[86]) {
         count++;
     }
 
     // RB
-    if (cube[85] == cube[90] && cube[106] == cube[111]) {
+    if (cube[85] != '-' && cube[85] == cube[90] && cube[106] == cube[111]) {
         count++;
     }
 
-    if (cube[95] == cube[90] && cube[116] == cube[111]) {
+    if (cube[95] != '-' && cube[95] == cube[90] && cube[116] == cube[111]) {
         count++;
     }
 
     // DF
-    if (cube[72] == cube[73] && cube[127] == cube[128]) {
+    if (cube[72] != '-' && cube[72] == cube[73] && cube[127] == cube[128]) {
         count++;
     }
 
-    if (cube[74] == cube[73] && cube[129] == cube[128]) {
+    if (cube[74] != '-' && cube[74] == cube[73] && cube[129] == cube[128]) {
         count++;
     }
 
     // DL
-    if (cube[131] == cube[136] && cube[49] == cube[48]) {
+    if (cube[131] != '-' && cube[131] == cube[136] && cube[49] == cube[48]) {
         count++;
     }
 
-    if (cube[141] == cube[136] && cube[47] == cube[48]) {
+    if (cube[141] != '-' && cube[141] == cube[136] && cube[47] == cube[48]) {
         count++;
     }
 
     // DR
-    if (cube[135] == cube[140] && cube[97] == cube[98]) {
+    if (cube[135] != '-' && cube[135] == cube[140] && cube[97] == cube[98]) {
         count++;
     }
 
-    if (cube[145] == cube[140] && cube[99] == cube[98]) {
+    if (cube[145] != '-' && cube[145] == cube[140] && cube[99] == cube[98]) {
         count++;
     }
 
     // DB
-    if (cube[147] == cube[148] && cube[124] == cube[123]) {
+    if (cube[147] != '-' && cube[147] == cube[148] && cube[124] == cube[123]) {
         count++;
     }
 
-    if (cube[149] == cube[148] && cube[122] == cube[123]) {
+    if (cube[149] != '-' && cube[149] == cube[148] && cube[122] == cube[123]) {
         count++;
     }
 
@@ -660,6 +660,7 @@ ida_search_complete_ULFRBD_centers_555 (char *cube)
         cube[69] == '1') {
 
         return 1;
+
         /*
         unsigned int edges_paired_count = 0;
         unsigned int wings_paired_count = 0;
@@ -667,7 +668,8 @@ ida_search_complete_ULFRBD_centers_555 (char *cube)
         wings_paired_count = get_wings_paired_count(cube);
         LOG("CENTERS SOLVED!! %d edges paired, %d wings paired\n", edges_paired_count, wings_paired_count);
 
-        if (edges_paired_count >= 1 || wings_paired_count >= 3) {
+        //if (edges_paired_count >= 1 || wings_paired_count >= 2) {
+        if (edges_paired_count >= 4) {
             return 1;
         } else {
             return 0;
