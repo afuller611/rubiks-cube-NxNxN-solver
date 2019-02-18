@@ -73,18 +73,18 @@ class LookupTable555StageFirstSixEdges(LookupTable):
     """
 
     state_targets = (
-        '---------LLL---LLLLLL---LLLLLLLLLLLL---LLLLLL------LLLLLL---LLL---------:',
-        '----L-L-L------LLLLLL------LLLLLL---LLLLLLLLLLLL---LLLLLL-------L-L-L---:',
-        '---L-L-L----LLLLLLLLLLLL---LLLLLL------LLLLLL------LLLLLL------L-L-L----:',
-        '---LLLLLL---LLL------LLL---------LLLLLL------LLL---------LLLLLLLLLLLLLLL:',
-        '---LLLLLL---LLL------LLL----L-L-L---LLLLLLLLLLLL---L-L-L-------LLLLLL---:',
-        '---LLLLLL---LLLLLLLLLLLL---L-L-L----LLL------LLL----L-L-L------LLLLLL---:',
-        'LLL------------LLLLLL------LLLLLL------LLLLLL---LLLLLLLLLLLL---------LLL:',
-        'LLL------LLL---------LLLLLL------LLL---------LLLLLL------LLLLLLLLLLLLLLL:',
-        'LLL------LLL----L-L-L---LLLLLLLLLLLL---L-L-L----LLL------LLLLLL------LLL:',
-        'LLL------LLL---L-L-L----LLL------LLL----L-L-L---LLLLLLLLLLLLLLL------LLL:',
-        'LLLLLLLLLLLLLLL---------LLL------LLLLLL---------LLL------LLLLLL------LLL:',
-        'LLLLLLLLLLLLLLL------LLLLLL---------LLL------LLLLLL------------LLLLLL---:',
+        '---------LLL---LLLLLL---LLLLLLLLLLLL---LLLLLL------LLLLLL---LLL---------',
+        '----L-L-L------LLLLLL------LLLLLL---LLLLLLLLLLLL---LLLLLL-------L-L-L---',
+        '---L-L-L----LLLLLLLLLLLL---LLLLLL------LLLLLL------LLLLLL------L-L-L----',
+        '---LLLLLL---LLL------LLL---------LLLLLL------LLL---------LLLLLLLLLLLLLLL',
+        '---LLLLLL---LLL------LLL----L-L-L---LLLLLLLLLLLL---L-L-L-------LLLLLL---',
+        '---LLLLLL---LLLLLLLLLLLL---L-L-L----LLL------LLL----L-L-L------LLLLLL---',
+        'LLL------------LLLLLL------LLLLLL------LLLLLL---LLLLLLLLLLLL---------LLL',
+        'LLL------LLL---------LLLLLL------LLL---------LLLLLL------LLLLLLLLLLLLLLL',
+        'LLL------LLL----L-L-L---LLLLLLLLLLLL---L-L-L----LLL------LLLLLL------LLL',
+        'LLL------LLL---L-L-L----LLL------LLL----L-L-L---LLLLLLLLLLLLLLL------LLL',
+        'LLLLLLLLLLLLLLL---------LLL------LLLLLL---------LLL------LLLLLL------LLL',
+        'LLLLLLLLLLLLLLL------LLLLLL---------LLL------LLLLLL------------LLLLLL---',
     )
 
 
@@ -674,7 +674,7 @@ class RubiksCube555ForNNN(RubiksCube555):
         for (line_number, key) in enumerate(sorted(results.keys())):
 
             if key in self.lt_edges_stage_first_six.state_targets:
-                steps = []
+                steps = ""
             else:
                 steps = results[key]
 
