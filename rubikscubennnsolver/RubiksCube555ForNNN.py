@@ -71,12 +71,29 @@ class LookupTable555StageFirstSixEdges(LookupTable):
     Average: 12.894078840190122
     Total  : 2,498,640,144
     """
+
+    state_targets = (
+        '---------LLL---LLLLLL---LLLLLLLLLLLL---LLLLLL------LLLLLL---LLL---------:',
+        '----L-L-L------LLLLLL------LLLLLL---LLLLLLLLLLLL---LLLLLL-------L-L-L---:',
+        '---L-L-L----LLLLLLLLLLLL---LLLLLL------LLLLLL------LLLLLL------L-L-L----:',
+        '---LLLLLL---LLL------LLL---------LLLLLL------LLL---------LLLLLLLLLLLLLLL:',
+        '---LLLLLL---LLL------LLL----L-L-L---LLLLLLLLLLLL---L-L-L-------LLLLLL---:',
+        '---LLLLLL---LLLLLLLLLLLL---L-L-L----LLL------LLL----L-L-L------LLLLLL---:',
+        'LLL------------LLLLLL------LLLLLL------LLLLLL---LLLLLLLLLLLL---------LLL:',
+        'LLL------LLL---------LLLLLL------LLL---------LLLLLL------LLLLLLLLLLLLLLL:',
+        'LLL------LLL----L-L-L---LLLLLLLLLLLL---L-L-L----LLL------LLLLLL------LLL:',
+        'LLL------LLL---L-L-L----LLL------LLL----L-L-L---LLLLLLLLLLLLLLL------LLL:',
+        'LLLLLLLLLLLLLLL---------LLL------LLLLLL---------LLL------LLLLLL------LLL:',
+        'LLLLLLLLLLLLLLL------LLLLLL---------LLL------LLLLLL------------LLLLLL---:',
+    )
+
+
     def __init__(self, parent):
         LookupTable.__init__(
             self,
             parent,
             'lookup-table-5x5x5-step100-stage-first-six-edges.txt',
-            'TBD',
+            self.state_targets,
 
             # 10-deep
             #linecount=28905188,
@@ -624,6 +641,19 @@ class RubiksCube555ForNNN(RubiksCube555):
             #post_pre_steps_solution = self.solution[:]
 
             for wing_strs in itertools.combinations(wing_strs_all, 6):
+                # Uncomment to test a specific wing_str
+                '''
+                exit_now = False
+
+                for x in ('UF', 'UL', 'UB', 'UR', 'DF', 'DB'):
+                    if x not in wing_strs:
+                        exit_now = True
+                        break
+
+                if exit_now:
+                    continue
+                '''
+
                 state = self.lt_edges_stage_first_six.state(wing_strs)
                 state_to_wing_str_combo[state] = wing_strs
                 state_to_pre_steps[(wing_strs, state)] = pre_steps
@@ -642,7 +672,12 @@ class RubiksCube555ForNNN(RubiksCube555):
         # We sort the keys of the dict so that the order is the same everytime, this isn't
         # required but makes troubleshooting easier.
         for (line_number, key) in enumerate(sorted(results.keys())):
-            steps = results[key]
+
+            if key in self.lt_edges_stage_first_six.state_targets:
+                steps = []
+            else:
+                steps = results[key]
+
             #self.state = post_pre_steps_state[:]
             #self.solution = post_pre_steps_solution[:]
             self.state = original_state[:]
@@ -688,7 +723,6 @@ class RubiksCube555ForNNN(RubiksCube555):
                 #    self, line_number+1, len_results, self.get_solution_len_minus_rotates(solution_steps)))
                 continue
 
-            # dwalton reset; ./usr/bin/rubiks-cube-solver.py --state UUUUUBUUUUUUUUURUUUUUUUUURRRRRRRRRRRRRRRURRRRRRRFRFFFFFFFFFFFFFFFFFFFLFDFRFDBDDDDDDDDDDDDDDDDDDDFDLDLDLFLLLLLLLLLLLLLLLLLLLLLBBBBBBBBBBBBBBBBBBBBBUBDB
             solve_steps = self.solution[original_solution_len:]
             solution_len = self.get_solution_len_minus_rotates(solve_steps)
             #solution_len = len(solve_steps)
@@ -711,10 +745,15 @@ class RubiksCube555ForNNN(RubiksCube555):
                 self.rotate(step)
 
             self.print_horse_shoe(min_wing_strs)
-            # dwalton count is off here
-            log.info("%s: 1st 6-edges staged to horseshoe via %s" % (self, " ".join(min_solution_steps)))
-            self.solution.append("COMMENT_%d_steps_555_horseshoe_staged" % self.get_solution_len_minus_rotates(self.solution[original_solution_len:]))
-            log.info("%s: 1st 6-edges staged to horseshoe, %d steps in" % (self, self.get_solution_len_minus_rotates(self.solution)))
+
+            if min_solution_steps:
+                log.info("%s: 1st 6-edges staged to horseshoe via %s" % (self, " ".join(min_solution_steps)))
+                horseshoe_len = self.get_solution_len_minus_rotates(self.solution[original_solution_len:])
+                self.solution.append("COMMENT_%d_steps_555_horseshoe_staged" % self.get_solution_len_minus_rotates(self.solution[original_solution_len:]))
+                log.info("%s: 1st 6-edges staged to horseshoe, %d steps in" % (self, self.get_solution_len_minus_rotates(self.solution)))
+            else:
+                log.info("%s: 1st 6-edges already staged to horseshoe" % self)
+
         else:
             self.state = original_state[:]
             self.solution = original_solution[:]
@@ -1189,8 +1228,11 @@ class RubiksCube555ForNNN(RubiksCube555):
                 self.rotate("D2")
                 self.rotate("R2")
 
-            # dwalton
-            self.solution.append("COMMENT_%d_steps_555_horseshoe_staged" % self.get_solution_len_minus_rotates(self.solution[tmp_solution_len:]))
+            horseshoe_len = self.get_solution_len_minus_rotates(self.solution[tmp_solution_len:])
+
+            if horseshoe_len:
+                self.solution.append("COMMENT_%d_steps_555_horseshoe_staged" % horseshoe_len)
+
             self.print_cube()
 
             if not self.edges_paired():
