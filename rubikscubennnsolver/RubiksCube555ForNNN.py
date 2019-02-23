@@ -1227,6 +1227,8 @@ class RubiksCube555ForNNN(RubiksCube555):
                 self.rotate("z")
                 self.rotate("D2")
                 self.rotate("R2")
+                #self.rotate("U2")
+                #self.rotate("L2")
 
             horseshoe_len = self.get_solution_len_minus_rotates(self.solution[tmp_solution_len:])
 
