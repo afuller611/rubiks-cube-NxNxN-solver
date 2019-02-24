@@ -43,32 +43,32 @@ class HorseShoeSolveError(SolveError):
 
 class LookupTable555StageFirstSixEdges(LookupTable):
     """
-    lookup-table-5x5x5-step100-stage-first-six-edges.txt
-    ====================================================
-    2 steps has 12 entries (0 percent, 0.00x previous step)
-    3 steps has 60 entries (0 percent, 5.00x previous step)
-    4 steps has 336 entries (0 percent, 5.60x previous step)
-    5 steps has 5,952 entries (0 percent, 17.71x previous step)
-    6 steps has 33,876 entries (0 percent, 5.69x previous step)
-    7 steps has 191,388 entries (0 percent, 5.65x previous step)
-    8 steps has 1,192,296 entries (4 percent, 6.23x previous step)
-    9 steps has 5,506,092 entries (19 percent, 4.62x previous step)
-    10 steps has 21,975,176 entries (76 percent, 3.99x previous step)
-
-    partial
-    11 steps has 53,853,742 entries (65 percent, 2.45x previous step)
-
     If we built this table the entire way it would have:
     (24!/(12!*12!)) * (12!/(6!*6!)) = 2,498,640,144 states
 
+    lookup-table-5x5x5-step100-stage-first-six-edges.txt
+    ====================================================
+    1 steps has 56 entries (0 percent, 0.00x previous step)
+    2 steps has 290 entries (0 percent, 5.18x previous step)
+    3 steps has 386 entries (0 percent, 1.33x previous step)
+    4 steps has 35 entries (0 percent, 0.09x previous step)
+    5 steps has 5,581 entries (0 percent, 159.46x previous step)
+    6 steps has 36,136 entries (0 percent, 6.47x previous step)
+    7 steps has 204,948 entries (0 percent, 5.67x previous step)
+    8 steps has 1,251,667 entries (1 percent, 6.11x previous step)
+    9 steps has 6,462,383 entries (5 percent, 5.16x previous step)
+    10 steps has 21,317,922 entries (19 percent, 3.30x previous step)
+    11 steps has 80,163,256 entries (73 percent, 3.76x previous step)
+
+    Total: 109,442,660 entries
+
     Extrapolating shows the table would roughly look like:
 
-    11 steps has 87,680,952 entries (3.99x previous step)
-    12 steps has 349,846,998 entries (3.99x previous step)
-    13 steps has 1,395,889,522 entries (3.99x previous step)
-    14 steps has 636,317,484 entries (0.46x previous step)
+    12 steps has 301,413,842 entries (3.76x previous step)
+    13 steps has 1,133,316,045 entries (3.76x previous step)
+    14 steps has 954,467,585 entries (0.84x previous step)
 
-    Average: 12.894078840190122
+    Average: 12.691952042454657
     Total  : 2,498,640,144
     """
 
@@ -95,13 +95,9 @@ class LookupTable555StageFirstSixEdges(LookupTable):
             'lookup-table-5x5x5-step100-stage-first-six-edges.txt',
             self.state_targets,
 
-            # 10-deep
-            #linecount=28905188,
-            #filesize=3208475868,
-
-            # 11-deep (partial)
-            linecount=82758930,
-            filesize=9434518020,
+            # 11-deep
+            linecount=109442660,
+            filesize=12476464608,
         )
 
     def state(self, wing_strs_to_stage):
