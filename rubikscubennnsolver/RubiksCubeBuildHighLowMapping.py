@@ -537,11 +537,11 @@ class RubiksCubeHighLow666(RubiksCube666):
                 self.move_wing_to_U_west(x)
 
                 if orbit == 0:
-                    high_edge_index = 61
-                    low_edge_index = 43
+                    high_edge_index = 25
+                    low_edge_index = 7
                 elif orbit == 1:
-                    high_edge_index = 55
-                    low_edge_index = 49
+                    high_edge_index = 19
+                    low_edge_index = 13
 
             elif wing_str == 'UR':
                 self.move_wing_to_U_east(x)
@@ -663,11 +663,11 @@ class RubiksCubeHighLow666(RubiksCube666):
                 self.move_wing_to_D_south(x)
 
                 if orbit == 0:
-                    high_edge_index = 212
-                    low_edge_index = 215
+                    high_edge_index = 215
+                    low_edge_index = 212
                 elif orbit == 1:
-                    high_edge_index = 213
-                    low_edge_index = 214
+                    high_edge_index = 214
+                    low_edge_index = 213
 
             elif wing_str == 'DL':
                 self.move_wing_to_D_west(x)
