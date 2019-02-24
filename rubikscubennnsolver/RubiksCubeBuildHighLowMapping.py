@@ -6,6 +6,8 @@ from rubikscubennnsolver import wing_str_map
 from rubikscubennnsolver.RubiksCube444 import RubiksCube444, moves_444
 from rubikscubennnsolver.RubiksCube555 import RubiksCube555, moves_555
 from rubikscubennnsolver.RubiksCube666 import RubiksCube666, moves_666
+from rubikscubennnsolver.RubiksCube666 import edge_orbit_0 as edge_orbit_0_666
+from rubikscubennnsolver.RubiksCube666 import edge_orbit_1 as edge_orbit_1_666
 from pprint import pformat
 
 
@@ -502,10 +504,11 @@ class RubiksCubeHighLow555(RubiksCube555):
 
 class RubiksCubeHighLow666(RubiksCube666):
 
-    def high_low_state(self, x, y, state_x, state_y, wing_str):
+    def high_low_state(self, x, y, state_x, state_y, wing_str, orbit):
         """
         Return U if this is a high edge, D if it is a low edge
         """
+        assert orbit in (0, 1), f"invalid orbit {orbit}"
         original_state = self.state[:]
         original_solution = self.solution[:]
 
@@ -522,23 +525,43 @@ class RubiksCubeHighLow666(RubiksCube666):
 
             if wing_str == 'UB':
                 self.move_wing_to_U_north(x)
-                high_edge_index = 2
-                low_edge_index = 3
+
+                if orbit == 0:
+                    high_edge_index = 2
+                    low_edge_index = 5
+                elif orbit == 1:
+                    high_edge_index = 3
+                    low_edge_index = 4
 
             elif wing_str == 'UL':
                 self.move_wing_to_U_west(x)
-                high_edge_index = 9
-                low_edge_index = 5
+
+                if orbit == 0:
+                    high_edge_index = 61
+                    low_edge_index = 43
+                elif orbit == 1:
+                    high_edge_index = 55
+                    low_edge_index = 49
 
             elif wing_str == 'UR':
                 self.move_wing_to_U_east(x)
-                high_edge_index = 8
-                low_edge_index = 12
+
+                if orbit == 0:
+                    high_edge_index = 12
+                    low_edge_index = 30
+                elif orbit == 1:
+                    high_edge_index = 18
+                    low_edge_index = 24
 
             elif wing_str == 'UF':
                 self.move_wing_to_U_south(x)
-                high_edge_index = 15
-                low_edge_index = 14
+
+                if orbit == 0:
+                    high_edge_index = 35
+                    low_edge_index = 32
+                elif orbit == 1:
+                    high_edge_index = 34
+                    low_edge_index = 33
 
             else:
                 raise Exception("invalid wing_str %s" % wing_str)
@@ -561,13 +584,23 @@ class RubiksCubeHighLow666(RubiksCube666):
 
             if wing_str == 'LB':
                 self.move_wing_to_L_west(x)
-                high_edge_index = 25
-                low_edge_index = 21
+
+                if orbit == 0:
+                    high_edge_index = 61
+                    low_edge_index = 43
+                elif orbit == 1:
+                    high_edge_index = 55
+                    low_edge_index = 49
 
             elif wing_str == 'LF':
                 self.move_wing_to_L_east(x)
-                high_edge_index = 24
-                low_edge_index = 28
+
+                if orbit == 0:
+                    high_edge_index = 48
+                    low_edge_index = 66
+                elif orbit == 1:
+                    high_edge_index = 54
+                    low_edge_index = 60
 
             else:
                 raise Exception("invalid wing_str %s" % wing_str)
@@ -590,13 +623,23 @@ class RubiksCubeHighLow666(RubiksCube666):
 
             if wing_str == 'RB':
                 self.move_wing_to_R_east(x)
-                high_edge_index = 56
-                low_edge_index = 60
+
+                if orbit == 0:
+                    high_edge_index = 120
+                    low_edge_index = 138
+                elif orbit == 1:
+                    high_edge_index = 126
+                    low_edge_index = 132
 
             elif wing_str == 'RF':
                 self.move_wing_to_R_west(x)
-                high_edge_index = 57
-                low_edge_index = 53
+
+                if orbit == 0:
+                    high_edge_index = 133
+                    low_edge_index = 115
+                elif orbit == 1:
+                    high_edge_index = 127
+                    low_edge_index = 121
 
             else:
                 raise Exception("invalid wing_str %s" % wing_str)
@@ -618,23 +661,43 @@ class RubiksCubeHighLow666(RubiksCube666):
         elif wing_str.startswith('D'):
             if wing_str == 'DB':
                 self.move_wing_to_D_south(x)
-                high_edge_index = 95
-                low_edge_index = 94
+
+                if orbit == 0:
+                    high_edge_index = 212
+                    low_edge_index = 215
+                elif orbit == 1:
+                    high_edge_index = 213
+                    low_edge_index = 214
 
             elif wing_str == 'DL':
                 self.move_wing_to_D_west(x)
-                high_edge_index = 89
-                low_edge_index = 85
+
+                if orbit == 0:
+                    high_edge_index = 205
+                    low_edge_index = 187
+                elif orbit == 1:
+                    high_edge_index = 199
+                    low_edge_index = 193
 
             elif wing_str == 'DR':
                 self.move_wing_to_D_east(x)
-                high_edge_index = 88
-                low_edge_index = 92
+
+                if orbit == 0:
+                    high_edge_index = 192
+                    low_edge_index = 210
+                elif orbit == 1:
+                    high_edge_index = 198
+                    low_edge_index = 204
 
             elif wing_str == 'DF':
                 self.move_wing_to_D_north(x)
-                high_edge_index = 82
-                low_edge_index = 83
+
+                if orbit == 0:
+                    high_edge_index = 182
+                    low_edge_index = 185
+                elif orbit == 1:
+                    high_edge_index = 183
+                    low_edge_index = 184
 
             else:
                 raise Exception("invalid wing_str %s" % wing_str)
@@ -656,13 +719,19 @@ class RubiksCubeHighLow666(RubiksCube666):
         else:
             raise Exception("invalid wing_str %s" % wing_str)
 
+
+        if orbit == 0:
+            assert high_edge_index in edge_orbit_0_666, f"{high_edge_index} is not in edge_orbit_0_666"
+            assert low_edge_index in edge_orbit_0_666, f"{low_edge_index} is not in edge_orbit_0_666"
+        elif orbit == 1:
+            assert high_edge_index in edge_orbit_1_666, f"{high_edge_index} is not in edge_orbit_1_666"
+            assert low_edge_index in edge_orbit_1_666, f"{low_edge_index} is not in edge_orbit_1_666"
+
         self.state = original_state[:]
         self.solution = original_solution[:]
 
-
         assert result in ('U', 'D')
         return result
-
 
     def build_highlow_edge_values(self):
         state = self.state
@@ -680,11 +749,15 @@ class RubiksCubeHighLow666(RubiksCube666):
                 wing_str = wing_str_map[state_x + state_y]
                 wing_tuple = (x, y, state_x, state_y)
 
+                if x in edge_orbit_0_666 and y in edge_orbit_0_666:
+                    orbit = 0
+                elif x in edge_orbit_1_666 and y in edge_orbit_1_666:
+                    orbit = 1
+                else:
+                    raise Exception(f"What orbit for ({x}, {y})?")
+
                 if wing_tuple not in new_highlow_edge_values:
-                    new_highlow_edge_values[wing_tuple] = self.high_low_state(x, y, state_x, state_y, wing_str)
+                    new_highlow_edge_values[wing_tuple] = self.high_low_state(x, y, state_x, state_y, wing_str, orbit)
 
         print("new highlow_edge_values\n\n%s\n\n" % pformat(new_highlow_edge_values))
         log.info("new_highlow_edge_values has %d entries" % len(new_highlow_edge_values))
-        sys.exit(0)
-
-

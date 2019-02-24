@@ -669,12 +669,13 @@ ida_search_complete_ULFRBD_centers_555 (char *cube)
         LOG("CENTERS SOLVED!! %d edges paired, %d wings paired\n", edges_paired_count, wings_paired_count);
 
         //if (edges_paired_count >= 1 || wings_paired_count >= 2) {
-        if (edges_paired_count >= 4) {
+        // if (edges_paired_count >= 4) {
+        if (wings_paired_count >= 3) {
             return 1;
         } else {
             return 0;
         }
-        */
+         */
 
     } else {
         return 0;
