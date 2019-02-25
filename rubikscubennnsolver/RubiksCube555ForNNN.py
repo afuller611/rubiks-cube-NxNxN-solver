@@ -72,6 +72,7 @@ class LookupTable555StageFirstSixEdges(LookupTable):
     Total  : 2,498,640,144
     """
 
+    '''
     state_targets = (
         '---------LLL---LLLLLL---LLLLLLLLLLLL---LLLLLL------LLLLLL---LLL---------',
         '----L-L-L------LLLLLL------LLLLLL---LLLLLLLLLLLL---LLLLLL-------L-L-L---',
@@ -86,7 +87,22 @@ class LookupTable555StageFirstSixEdges(LookupTable):
         'LLLLLLLLLLLLLLL---------LLL------LLLLLL---------LLL------LLLLLL------LLL',
         'LLLLLLLLLLLLLLL------LLLLLL---------LLL------LLLLLL------------LLLLLL---',
     )
+    '''
 
+    state_targets = (
+        '0071f8fff1f81f8e00',
+        '0a81f81f8fff1f80a8',
+        '150fff1f81f81f8150',
+        '1f8e07007e07007fff',
+        '1f8e070a8fff1501f8',
+        '1f8fff150e070a81f8',
+        'e001f81f81f8fff007',
+        'e07007e07007e07fff',
+        'e070a8fff150e07e07',
+        'e07150e070a8fffe07',
+        'fffe00e07e00e07e07',
+        'fffe07e00e07e001f8',
+    )
 
     def __init__(self, parent):
         LookupTable.__init__(
@@ -95,9 +111,13 @@ class LookupTable555StageFirstSixEdges(LookupTable):
             'lookup-table-5x5x5-step100-stage-first-six-edges.txt',
             self.state_targets,
 
-            # 11-deep
-            linecount=109442660,
-            filesize=12476464608,
+            # 10-deep...edges solutions average 43.5 over 10 test cubes
+            linecount=28905188,
+            filesize=1647595716,
+
+            # 11-deep...edges solutions average 43.8 over 10 test cubes
+            #linecount=109442660,
+            #filesize=6566560320,
         )
 
     def state(self, wing_strs_to_stage):
@@ -110,13 +130,15 @@ class LookupTable555StageFirstSixEdges(LookupTable):
             wing_str = wing_str_map[square_value + partner_value]
 
             if wing_str in wing_strs_to_stage:
-                state[square_index] = 'L'
-                state[partner_index] = 'L'
+                state[square_index] = '1'
+                state[partner_index] = '1'
             else:
-                state[square_index] = '-'
-                state[partner_index] = '-'
+                state[square_index] = '0'
+                state[partner_index] = '0'
 
         edges_state = ''.join([state[square_index] for square_index in edges_555])
+        edges_state = int(edges_state, 2)
+        edges_state = self.hex_format % edges_state
         return edges_state
 
 
@@ -654,8 +676,8 @@ class RubiksCube555ForNNN(RubiksCube555):
                 state_to_wing_str_combo[state] = wing_strs
                 state_to_pre_steps[(wing_strs, state)] = pre_steps
                 states_to_find.add(state)
-                assert state.count("L") == 36
-                assert state.count("-") == 36
+                #assert state.count("L") == 36
+                #assert state.count("-") == 36
 
         states_to_find = sorted(list(states_to_find))
         log.info("%s: %d states_to_find" % (self, len(states_to_find)))
