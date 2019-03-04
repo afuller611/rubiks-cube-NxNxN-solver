@@ -177,9 +177,14 @@ class LookupTable555SolveFirstSixEdges(LookupTable):
             parent,
             'lookup-table-5x5x5-step100-solve-first-six-edges.txt',
             'OOopPPQQqrRRsSSTTtuUUVVvWWwxXXYYyzZZ',
+
             linecount=250737489,
             max_depth=17,
             filesize=24823011411)
+
+            #linecount=35665293,
+            #max_depth=14,
+            #filesize=3174211077)
 
     def ida_heuristic(self):
         state = edges_recolor_pattern_555(self.parent.state[:])
@@ -755,6 +760,13 @@ class RubiksCube555ForNNN(RubiksCube555):
                 log.info("%s: %d/%d 1st 6-edges can be staged in %d steps" % (
                     self, line_number+1, len_results, solution_len))
 
+        # For some cubes we sometimes find long solutions when max_pre_steps_length is 0, if this is
+        # the case pretend we did not find a solution at all so that we will try again with
+        # max_pre_steps_length of 1 which will give us way more options to choose from. Even though
+        # we add one pre_step it finds a shorter overall solution.
+        if max_pre_steps_length is 0 and min_solution_len is not None and min_solution_len >= 46:
+            min_solution_len = None
+
         if min_solution_len is not None:
             self.state = original_state[:]
             self.solution = original_solution[:]
@@ -1229,6 +1241,9 @@ class RubiksCube555ForNNN(RubiksCube555):
 
         if not self.edges_paired():
 
+            # 10 cubes, starting at 0 pre-step, took 20s, avg edges is 43.5, avg overall was 96.4
+            # 10 cubes, starting at 1 pre-step, took 50s, avg edges is 42.4, avg overall was 95.6
+            # The name of the game here is speed so start with 0
             for x in range(3):
                 try:
                     self.stage_first_six_edges_555(x)

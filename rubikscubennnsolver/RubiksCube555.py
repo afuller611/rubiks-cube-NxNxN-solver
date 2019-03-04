@@ -39,10 +39,15 @@ moves_555 = (
     "B" , "B'", "B2", "Bw", "Bw'", "Bw2",
     "D" , "D'", "D2", "Dw", "Dw'", "Dw2",
 
-    # slices...not used for now
-    # "2U", "2U'", "2U2", "2D", "2D'", "2D2",
-    # "2L", "2L'", "2L2", "2R", "2R'", "2R2",
-    # "2F", "2F'", "2F2", "2B", "2B'", "2B2"
+    # slices
+    #"2U", "2U'", "2U2", "2D", "2D'", "2D2",
+    #"2L", "2L'", "2L2", "2R", "2R'", "2R2",
+    #"2F", "2F'", "2F2", "2B", "2B'", "2B2",
+
+    # middle layer slices
+    #"3U", "3U'", "3U2",
+    #"3L", "3L'", "3L2",
+    #"3F", "3F'", "3F2",
 )
 solved_555 = 'UUUUUUUUUUUUUUUUUUUUUUUUURRRRRRRRRRRRRRRRRRRRRRRRRFFFFFFFFFFFFFFFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDDDDDDDLLLLLLLLLLLLLLLLLLLLLLLLLBBBBBBBBBBBBBBBBBBBBBBBBB'
 
