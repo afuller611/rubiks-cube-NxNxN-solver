@@ -1204,142 +1204,325 @@ class RubiksCube(object):
                 "2R", "2R'", "2R2",
                 "2B", "2B'", "2B2",
                 "2D", "2D'", "2D2",
+
+                # middle layer slices
                 "3U", "3U'", "3U2",
                 "3L", "3L'", "3L2",
                 "3F", "3F'", "3F2",
                 "3R", "3R'", "3R2",
                 "3B", "3B'", "3B2",
                 "3D", "3D'", "3D2",
+
+                # BTM slices
+                "2-3Lw", "2-3Lw'", "2-3Lw2",
+                "2-3Rw", "2-3Rw'", "2-3Rw2",
+                "2-4Lw", "2-4Lw'", "2-4Lw2",
             ):
 
             if action == "x2":
                 self.rotate_guts("x")
                 self.rotate_guts("x")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "y2":
                 self.rotate_guts("y")
                 self.rotate_guts("y")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "z2":
                 self.rotate_guts("z")
                 self.rotate_guts("z")
+                self.solution.pop()
+                self.solution.pop()
+
 
             elif action == "2U":
                 self.rotate_guts("Uw")
                 self.rotate_guts("U'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2U'":
                 self.rotate_guts("Uw'")
                 self.rotate_guts("U")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2U2":
                 self.rotate_guts("Uw2")
                 self.rotate_guts("U2")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2D":
                 self.rotate_guts("Dw")
                 self.rotate_guts("D'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2D'":
                 self.rotate_guts("Dw'")
                 self.rotate_guts("D")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2D2":
                 self.rotate_guts("Dw2")
                 self.rotate_guts("D2")
+                self.solution.pop()
+                self.solution.pop()
+
 
             elif action == "2L":
                 self.rotate_guts("Lw")
                 self.rotate_guts("L'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2L'":
                 self.rotate_guts("Lw'")
                 self.rotate_guts("L")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2L2":
                 self.rotate_guts("Lw2")
                 self.rotate_guts("L2")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2R":
                 self.rotate_guts("Rw")
                 self.rotate_guts("R'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2R'":
                 self.rotate_guts("Rw'")
                 self.rotate_guts("R")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2R2":
                 self.rotate_guts("Rw2")
                 self.rotate_guts("R2")
+                self.solution.pop()
+                self.solution.pop()
 
             elif action == "2F":
                 self.rotate_guts("Fw")
                 self.rotate_guts("F'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2F'":
                 self.rotate_guts("Fw'")
                 self.rotate_guts("F")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2F2":
                 self.rotate_guts("Fw2")
                 self.rotate_guts("F2")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2B":
                 self.rotate_guts("Bw")
                 self.rotate_guts("B'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2B'":
                 self.rotate_guts("Bw'")
                 self.rotate_guts("B")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "2B2":
                 self.rotate_guts("Bw2")
                 self.rotate_guts("B2")
+                self.solution.pop()
+                self.solution.pop()
 
             elif action == "3U":
                 self.rotate_guts("3Uw")
                 self.rotate_guts("Uw'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3U'":
                 self.rotate_guts("3Uw'")
                 self.rotate_guts("Uw")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3U2":
                 self.rotate_guts("3Uw2")
                 self.rotate_guts("Uw2")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3D":
                 self.rotate_guts("3Dw")
                 self.rotate_guts("Dw'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3D'":
                 self.rotate_guts("3Dw'")
                 self.rotate_guts("Dw")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3D2":
                 self.rotate_guts("3Dw2")
                 self.rotate_guts("Dw2")
+                self.solution.pop()
+                self.solution.pop()
 
             elif action == "3L":
                 self.rotate_guts("3Lw")
                 self.rotate_guts("Lw'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3L'":
                 self.rotate_guts("3Lw'")
                 self.rotate_guts("Lw")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3L2":
                 self.rotate_guts("3Lw2")
                 self.rotate_guts("Lw2")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3R":
                 self.rotate_guts("3Rw")
                 self.rotate_guts("Rw'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3R'":
                 self.rotate_guts("3Rw'")
                 self.rotate_guts("Rw")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3R2":
                 self.rotate_guts("3Rw2")
                 self.rotate_guts("Rw2")
+                self.solution.pop()
+                self.solution.pop()
 
             elif action == "3F":
                 self.rotate_guts("3Fw")
                 self.rotate_guts("Fw'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3F'":
                 self.rotate_guts("3Fw'")
                 self.rotate_guts("Fw")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3F2":
                 self.rotate_guts("3Fw2")
                 self.rotate_guts("Fw2")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3B":
                 self.rotate_guts("3Bw")
                 self.rotate_guts("Bw'")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3B'":
                 self.rotate_guts("3Bw'")
                 self.rotate_guts("Bw")
+                self.solution.pop()
+                self.solution.pop()
+
             elif action == "3B2":
                 self.rotate_guts("3Bw2")
                 self.rotate_guts("Bw2")
+                self.solution.pop()
+                self.solution.pop()
+
+
+            # dwalton
+            elif action == "2-3Lw":
+                # 3Lw L'
+                self.rotate_guts("3Lw")
+                self.rotate_guts("L'")
+                self.solution.pop()
+                self.solution.pop()
+
+            elif action == "2-3Lw'":
+                # 3Lw' L
+                self.rotate_guts("3Lw'")
+                self.rotate_guts("L")
+                self.solution.pop()
+                self.solution.pop()
+
+            elif action == "2-3Lw2":
+                # 3Lw2 L2
+                self.rotate_guts("3Lw2")
+                self.rotate_guts("L2")
+                self.solution.pop()
+                self.solution.pop()
+
+            elif action == "2-3Rw":
+                # 3Rw R'
+                self.rotate_guts("3Rw")
+                self.rotate_guts("R'")
+                self.solution.pop()
+                self.solution.pop()
+
+            elif action == "2-3Rw'":
+                # 3Rw' R
+                self.rotate_guts("3Rw'")
+                self.rotate_guts("R")
+                self.solution.pop()
+                self.solution.pop()
+
+            elif action == "2-3Rw2":
+                # 3Rw2 R2
+                self.rotate_guts("3Rw2")
+                self.rotate_guts("R2")
+                self.solution.pop()
+                self.solution.pop()
+
+            elif action == "2-4Lw":
+                # 4Lw L'
+                self.rotate_guts("4Lw")
+                self.rotate_guts("L'")
+                self.solution.pop()
+                self.solution.pop()
+
+            elif action == "2-4Lw'":
+                # 4Lw' L
+                self.rotate_guts("4Lw'")
+                self.rotate_guts("L")
+                self.solution.pop()
+                self.solution.pop()
+
+            elif action == "2-4Lw2":
+                # 4Lw2 L2
+                self.rotate_guts("4Lw2")
+                self.rotate_guts("L2")
+                self.solution.pop()
+                self.solution.pop()
+
             else:
                 raise Exception("Unsupported action %s" % action)
 
-            self.solution.pop()
-            self.solution.pop()
             self.solution.append(action)
 
         else:
