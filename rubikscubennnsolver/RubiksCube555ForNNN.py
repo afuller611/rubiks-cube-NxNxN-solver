@@ -170,6 +170,30 @@ class LookupTable555SolveFirstSixEdges(LookupTable):
     How many moves would it take to reach them?
         depth 17 would roughly add 3.5 x 116,204,620 = 406,716,170
         So there might be a few beyond depth 17 but not many at all.
+
+    lookup-table-5x5x5-step100-solve-first-six-edges.txt.depth-14.with-middle-slices
+    ================================================================================
+    2 steps has 1 entries (0 percent, 0.00x previous step)
+    3 steps has 11 entries (0 percent, 11.00x previous step)
+    4 steps has 9 entries (0 percent, 0.82x previous step)
+    5 steps has 27 entries (0 percent, 3.00x previous step)
+    6 steps has 210 entries (0 percent, 7.78x previous step)
+    7 steps has 1,171 entries (0 percent, 5.58x previous step)
+    8 steps has 4,716 entries (0 percent, 4.03x previous step)
+    9 steps has 23,532 entries (0 percent, 4.99x previous step)
+    10 steps has 98,976 entries (0 percent, 4.21x previous step)
+    11 steps has 429,204 entries (0 percent, 4.34x previous step)
+    12 steps has 2,099,672 entries (3 percent, 4.89x previous step)
+    13 steps has 10,329,260 entries (17 percent, 4.92x previous step)
+    14 steps has 47,313,575 entries (78 percent, 4.58x previous step)
+
+    Total: 60,300,364 entries
+    Average: 13.73 moves
+
+
+    15 steps has 101,028,062 entries (62 percent, 2.14x previous step)
+
+    Total: 161,328,426 entries
     """
     def __init__(self, parent):
         LookupTable.__init__(
@@ -178,13 +202,15 @@ class LookupTable555SolveFirstSixEdges(LookupTable):
             'lookup-table-5x5x5-step100-solve-first-six-edges.txt',
             'OOopPPQQqrRRsSSTTtuUUVVvWWwxXXYYyzZZ',
 
-            linecount=250737489,
-            max_depth=17,
-            filesize=24823011411)
+            # no middle slice
+            #linecount=250737489,
+            #max_depth=17,
+            #filesize=24823011411)
 
-            #linecount=35665293,
-            #max_depth=14,
-            #filesize=3174211077)
+            # middle slice
+            linecount=161328426,
+            max_depth=15,
+            filesize=15003543618)
 
     def ida_heuristic(self):
         state = edges_recolor_pattern_555(self.parent.state[:])
