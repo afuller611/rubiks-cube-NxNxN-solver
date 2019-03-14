@@ -111,11 +111,11 @@ class LookupTable555StageFirstSixEdges(LookupTable):
             'lookup-table-5x5x5-step100-stage-first-six-edges.txt',
             self.state_targets,
 
-            # 10-deep...edges solutions average 43.5 over 10 test cubes
+            # 10-deep...edges solutions averaged 43.42 over 50 test cubes
             linecount=28905188,
             filesize=1647595716,
 
-            # 11-deep...edges solutions average 43.8 over 10 test cubes
+            # 11-deep...edges solutions averaged 43.36 over 50 test cubes
             #linecount=109442660,
             #filesize=6566560320,
         )
@@ -170,30 +170,6 @@ class LookupTable555SolveFirstSixEdges(LookupTable):
     How many moves would it take to reach them?
         depth 17 would roughly add 3.5 x 116,204,620 = 406,716,170
         So there might be a few beyond depth 17 but not many at all.
-
-    lookup-table-5x5x5-step100-solve-first-six-edges.txt.depth-14.with-middle-slices
-    ================================================================================
-    2 steps has 1 entries (0 percent, 0.00x previous step)
-    3 steps has 11 entries (0 percent, 11.00x previous step)
-    4 steps has 9 entries (0 percent, 0.82x previous step)
-    5 steps has 27 entries (0 percent, 3.00x previous step)
-    6 steps has 210 entries (0 percent, 7.78x previous step)
-    7 steps has 1,171 entries (0 percent, 5.58x previous step)
-    8 steps has 4,716 entries (0 percent, 4.03x previous step)
-    9 steps has 23,532 entries (0 percent, 4.99x previous step)
-    10 steps has 98,976 entries (0 percent, 4.21x previous step)
-    11 steps has 429,204 entries (0 percent, 4.34x previous step)
-    12 steps has 2,099,672 entries (3 percent, 4.89x previous step)
-    13 steps has 10,329,260 entries (17 percent, 4.92x previous step)
-    14 steps has 47,313,575 entries (78 percent, 4.58x previous step)
-
-    Total: 60,300,364 entries
-    Average: 13.73 moves
-
-
-    15 steps has 101,028,062 entries (62 percent, 2.14x previous step)
-
-    Total: 161,328,426 entries
     """
     def __init__(self, parent):
         LookupTable.__init__(
@@ -203,14 +179,10 @@ class LookupTable555SolveFirstSixEdges(LookupTable):
             'OOopPPQQqrRRsSSTTtuUUVVvWWwxXXYYyzZZ',
 
             # no middle slice
-            #linecount=250737489,
-            #max_depth=17,
-            #filesize=24823011411)
-
-            # middle slice
-            linecount=161328426,
-            max_depth=15,
-            filesize=15003543618)
+            linecount=250737489,
+            max_depth=17,
+            filesize=24823011411
+        )
 
     def ida_heuristic(self):
         state = edges_recolor_pattern_555(self.parent.state[:])
@@ -744,20 +716,27 @@ class RubiksCube555ForNNN(RubiksCube555):
             #self.print_horse_shoe(wing_strs)
 
             solution_steps = self.solution[original_solution_len:]
+            #log.info("%s: %d/%d 1st 6-edges can be staged in %d steps" % (
+            #    self, line_number+1, len_results, self.get_solution_len_minus_rotates(solution_steps)))
+            stage_horseshoe_solution_len = len(self.solution)
 
+            # Solve the 1st 6-edges
             try:
                 self.pair_first_six_edges_555(False)
+                #log.info("%s: %d/%d 1st 6-edges can be solved in %d steps" % (
+                #    self, line_number+1, len_results, self.get_solution_len_minus_rotates(self.solution[stage_horseshoe_solution_len:])))
 
-                if not self.edges_paired():
-                    if min_solution_len:
-                        solve_steps = self.solution[original_solution_len:]
-                        #solution_len = len(solve_steps)
-                        solution_len = self.get_solution_len_minus_rotates(solve_steps)
-                        if solution_len + 1 >= min_solution_len:
-                            log.info("%s: %d/%d SKIP solution_len is %d but min_solution_len is %d" % (
-                                self, line_number+1, len_results, solution_len, min_solution_len))
-                            continue
+            except NoSteps as e:
+                #log.info("%s: %d/%d 1st 6-edges can NOT be solved (16-deep for now)\n%s" % (
+                #    self, line_number+1, len_results, e))
+                #log.info("%s: %d/%d 1st 6-edges can NOT be solved (16-deep for now)\n" % (
+                #    self, line_number+1, len_results))
+                continue
 
+            solve_first_six_edges_solution_len = len(self.solution)
+
+            if not self.edges_paired():
+                try:
                     self.rotate("z")
 
                     # It doesn't appear to matter much if you do D2 R2 vs U2 L2
@@ -767,23 +746,24 @@ class RubiksCube555ForNNN(RubiksCube555):
                     #self.rotate("L2")
                     self.pair_first_six_edges_555(False)
 
-            except NoSteps as e:
-                #log.info("%s: %d/%d 1st 6-edges can be staged in %d steps but we do not have an entry to solve them (16-deep for now)" % (
-                #    self, line_number+1, len_results, self.get_solution_len_minus_rotates(solution_steps)))
-                continue
+                    #log.info("%s: %d/%d 2nd 6-edges can be solved in %d steps" % (
+                    #    self, line_number+1, len_results, self.get_solution_len_minus_rotates(self.solution[solve_first_six_edges_solution_len:])))
+                except NoSteps as e:
+                    #log.info("%s: %d/%d 2nd 6-edges can NOT be solved (16-deep for now)\n" % (
+                    #    self, line_number+1, len_results))
+                    continue
 
             solve_steps = self.solution[original_solution_len:]
             solution_len = self.get_solution_len_minus_rotates(solve_steps)
-            #solution_len = len(solve_steps)
 
             if min_solution_len is None or solution_len < min_solution_len:
-                log.warning("%s: %d/%d 1st 6-edges can be staged in %d steps %s (NEW MIN)" % (
+                log.warning("%s: %d/%d horseshoe edges can be solved in %d steps %s (NEW MIN)" % (
                     self, line_number+1, len_results, solution_len, ' '.join(solution_steps)))
                 min_solution_len = solution_len
                 min_solution_steps = solution_steps
                 min_wing_strs = wing_strs
             else:
-                log.info("%s: %d/%d 1st 6-edges can be staged in %d steps" % (
+                log.info("%s: %d/%d horseshoe edges can be solved in %d steps" % (
                     self, line_number+1, len_results, solution_len))
 
         # For some cubes we sometimes find long solutions when max_pre_steps_length is 0, if this is
@@ -803,7 +783,7 @@ class RubiksCube555ForNNN(RubiksCube555):
             self.print_horse_shoe(min_wing_strs)
 
             if min_solution_steps:
-                log.info("%s: 1st 6-edges staged to horseshoe via %s" % (self, " ".join(min_solution_steps)))
+                log.info("%s: 1st 6-edges staged to horseshoe via %s (%d steps)" % (self, " ".join(min_solution_steps), self.get_solution_len_minus_rotates(min_solution_steps)))
                 horseshoe_len = self.get_solution_len_minus_rotates(self.solution[original_solution_len:])
                 self.solution.append("COMMENT_%d_steps_555_horseshoe_staged" % self.get_solution_len_minus_rotates(self.solution[original_solution_len:]))
                 log.info("%s: 1st 6-edges staged to horseshoe, %d steps in" % (self, self.get_solution_len_minus_rotates(self.solution)))
